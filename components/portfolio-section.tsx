@@ -5,11 +5,11 @@ import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react"
 
 const projects = [
   {
-    title: "Project One",
-    description: "A brief description of the first project and what it does.",
-    tags: ["Landing Page", "WordPress", "UI/UX"],
-    image: "/placeholder-project-1.jpg",
-    link: "#",
+    title: "E-Commerce Website",
+    description: "Electro-shop website (use VPN)",
+    tags: ["E-Commerce", "WordPress", "Online Shop"],
+    image: "/images/project-ecommerce.png",
+    link: "http://mpress.fwh.is/",
   },
   {
     title: "Project Two",

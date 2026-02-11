@@ -44,8 +44,8 @@ export function SkillsSection() {
       {/* Section Header */}
       <div className="text-center mb-16">
         <div className="flex items-center justify-center gap-3 mb-4">
-          <span className="block w-1 h-10 bg-primary rounded-full" />
-          <h2 className="font-display text-4xl md:text-5xl tracking-wide text-primary">
+          <span className="block w-1 h-10 bg-foreground rounded-full" />
+          <h2 className="font-display text-4xl md:text-5xl tracking-wide text-foreground">
             What I do
           </h2>
         </div>
@@ -60,7 +60,7 @@ export function SkillsSection() {
       <div className="flex items-start gap-6 max-w-5xl mx-auto">
         {/* Vertical "Skills" label */}
         <div className="hidden md:flex flex-col items-center gap-3 pt-8">
-          <span className="block w-1 h-16 bg-primary rounded-full" />
+          <span className="block w-1 h-16 bg-foreground rounded-full" />
           <span
             className="font-display text-2xl tracking-widest text-foreground"
             style={{ writingMode: "vertical-lr" }}

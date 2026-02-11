@@ -99,35 +99,17 @@ export function PortfolioSection() {
         <div className="relative">
           <div className="bg-card rounded-2xl overflow-hidden border border-border">
             {/* Image area with smooth transition */}
-            <div className="relative w-full aspect-video bg-secondary/50 overflow-hidden">
+            <div className="relative w-full aspect-[16/9] bg-secondary/50 overflow-hidden">
               <div
-                className={`absolute inset-0 flex items-center justify-center transition-all duration-400 ease-out ${animClass}`}
-                style={{ transitionDuration: "400ms" }}
-              >
-                <div className="relative w-[90%] md:w-[60%] h-[85%] rounded-lg overflow-hidden shadow-2xl">
-                  <img
-                    src={project.image || "/placeholder.svg"}
-                    alt={project.title}
-                    className="w-full h-full object-cover object-top"
-                    crossOrigin="anonymous"
-                    loading="eager"
-                  />
-                </div>
-              </div>
-
-              {/* Floating next preview - subtle behind main */}
-              <div
-                className={`absolute right-0 top-[5%] w-[40%] h-[80%] rounded-lg overflow-hidden shadow-xl opacity-30 rotate-2 hidden md:block transition-all duration-400 ease-out ${
-                  isAnimating ? "opacity-0 scale-95" : "opacity-30 scale-100"
-                }`}
+                className={`absolute inset-0 transition-all ease-out ${animClass}`}
                 style={{ transitionDuration: "400ms" }}
               >
                 <img
-                  src={projects[(current + 1) % projects.length].image || "/placeholder.svg"}
-                  alt="Next project preview"
+                  src={project.image || "/placeholder.svg"}
+                  alt={project.title}
                   className="w-full h-full object-cover object-top"
                   crossOrigin="anonymous"
-                  loading="lazy"
+                  loading="eager"
                 />
               </div>
             </div>

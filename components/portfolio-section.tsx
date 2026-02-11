@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useCallback, useRef, useEffect } from "react"
 import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react"
 
 const projects = [
@@ -36,16 +36,57 @@ const projects = [
 
 export function PortfolioSection() {
   const [current, setCurrent] = useState(0)
+  const [isAnimating, setIsAnimating] = useState(false)
+  const [direction, setDirection] = useState<"left" | "right">("right")
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
-  const prev = () => setCurrent((c) => (c === 0 ? projects.length - 1 : c - 1))
-  const next = () => setCurrent((c) => (c === projects.length - 1 ? 0 : c + 1))
+  const navigate = useCallback(
+    (dir: "left" | "right") => {
+      if (isAnimating) return
+      setDirection(dir)
+      setIsAnimating(true)
+
+      timeoutRef.current = setTimeout(() => {
+        setCurrent((c) => {
+          if (dir === "right") return c === projects.length - 1 ? 0 : c + 1
+          return c === 0 ? projects.length - 1 : c - 1
+        })
+        setIsAnimating(false)
+      }, 400)
+    },
+    [isAnimating],
+  )
+
+  const goTo = useCallback(
+    (index: number) => {
+      if (isAnimating || index === current) return
+      setDirection(index > current ? "right" : "left")
+      setIsAnimating(true)
+      timeoutRef.current = setTimeout(() => {
+        setCurrent(index)
+        setIsAnimating(false)
+      }, 400)
+    },
+    [isAnimating, current],
+  )
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current)
+    }
+  }, [])
 
   const project = projects[current]
+
+  const animClass = isAnimating
+    ? direction === "right"
+      ? "opacity-0 translate-x-8"
+      : "opacity-0 -translate-x-8"
+    : "opacity-100 translate-x-0"
 
   return (
     <section id="portfolio" className="py-20 px-6">
       <div className="max-w-5xl mx-auto">
-        {/* Header */}
         <div className="text-center mb-14">
           <h2 className="font-display text-4xl md:text-5xl tracking-wide text-foreground">
             My Works
@@ -55,78 +96,90 @@ export function PortfolioSection() {
           </p>
         </div>
 
-        {/* Slider */}
         <div className="relative">
-          {/* Project Card */}
           <div className="bg-card rounded-2xl overflow-hidden border border-border">
-            {/* Image Area */}
-            <div className="relative w-full aspect-video bg-secondary/50 overflow-hidden group">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="relative w-[85%] h-[85%] rounded-lg overflow-hidden shadow-2xl">
+            {/* Image area with smooth transition */}
+            <div className="relative w-full aspect-video bg-secondary/50 overflow-hidden">
+              <div
+                className={`absolute inset-0 flex items-center justify-center transition-all duration-400 ease-out ${animClass}`}
+                style={{ transitionDuration: "400ms" }}
+              >
+                <div className="relative w-[90%] md:w-[60%] h-[85%] rounded-lg overflow-hidden shadow-2xl">
                   <img
                     src={project.image || "/placeholder.svg"}
                     alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full object-cover object-top"
                     crossOrigin="anonymous"
+                    loading="eager"
                   />
                 </div>
               </div>
-              {/* Floating second mockup */}
-              <div className="absolute -right-4 top-8 w-[45%] h-[80%] rounded-lg overflow-hidden shadow-2xl opacity-60 rotate-2 hidden md:block">
+
+              {/* Floating next preview - subtle behind main */}
+              <div
+                className={`absolute right-0 top-[5%] w-[40%] h-[80%] rounded-lg overflow-hidden shadow-xl opacity-30 rotate-2 hidden md:block transition-all duration-400 ease-out ${
+                  isAnimating ? "opacity-0 scale-95" : "opacity-30 scale-100"
+                }`}
+                style={{ transitionDuration: "400ms" }}
+              >
                 <img
                   src={projects[(current + 1) % projects.length].image || "/placeholder.svg"}
                   alt="Next project preview"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-top"
                   crossOrigin="anonymous"
+                  loading="lazy"
                 />
               </div>
             </div>
 
-            {/* Info Area */}
+            {/* Info area with smooth transition */}
             <div className="p-6 md:p-8 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-              <div className="flex-1">
+              <div
+                className={`flex-1 transition-all ease-out ${animClass}`}
+                style={{ transitionDuration: "400ms", transitionDelay: "50ms" }}
+              >
                 <h3 className="text-2xl md:text-3xl font-semibold text-foreground mb-3">
                   {project.title}
                 </h3>
                 <p className="text-muted-foreground mb-4 leading-relaxed">
                   {project.description}
                 </p>
-                {/* Tags */}
                 <div className="flex flex-wrap gap-2 mb-5">
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="px-4 py-1.5 rounded-full border border-border text-sm text-foreground bg-secondary/50 hover:bg-secondary transition-colors"
+                      className="px-4 py-1.5 rounded-full border border-border text-sm text-foreground bg-secondary/50"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
-                {/* View Project Button */}
                 <a
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-[#ff4d2d] text-foreground font-semibold text-sm hover:bg-[#e0432a] transition-colors"
+                  className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-[#ff4d2d] text-foreground font-semibold text-sm hover:bg-[#e0432a] transition-colors duration-200"
                 >
                   View Project
                   <ExternalLink className="w-4 h-4" />
                 </a>
               </div>
 
-              {/* Navigation Arrows */}
+              {/* Navigation arrows */}
               <div className="flex items-center gap-3">
                 <button
-                  onClick={prev}
+                  onClick={() => navigate("left")}
+                  disabled={isAnimating}
                   aria-label="Previous project"
-                  className="w-12 h-12 rounded-full bg-[#ff4d2d] text-foreground flex items-center justify-center hover:bg-[#e0432a] transition-colors"
+                  className="w-12 h-12 rounded-full bg-[#ff4d2d] text-foreground flex items-center justify-center hover:bg-[#e0432a] transition-colors duration-200 disabled:opacity-50"
                 >
                   <ChevronLeft className="w-5 h-5" />
                 </button>
                 <button
-                  onClick={next}
+                  onClick={() => navigate("right")}
+                  disabled={isAnimating}
                   aria-label="Next project"
-                  className="w-12 h-12 rounded-full bg-[#ff4d2d] text-foreground flex items-center justify-center hover:bg-[#e0432a] transition-colors"
+                  className="w-12 h-12 rounded-full bg-[#ff4d2d] text-foreground flex items-center justify-center hover:bg-[#e0432a] transition-colors duration-200 disabled:opacity-50"
                 >
                   <ChevronRight className="w-5 h-5" />
                 </button>
@@ -134,15 +187,17 @@ export function PortfolioSection() {
             </div>
           </div>
 
-          {/* Dots */}
-          <div className="flex justify-center gap-2 mt-6">
+          {/* Dots navigation */}
+          <div className="flex justify-center gap-2.5 mt-6">
             {projects.map((_, i) => (
               <button
                 key={i}
-                onClick={() => setCurrent(i)}
+                onClick={() => goTo(i)}
                 aria-label={`Go to project ${i + 1}`}
-                className={`w-2.5 h-2.5 rounded-full transition-colors ${
-                  i === current ? "bg-[#ff4d2d]" : "bg-muted-foreground/30"
+                className={`h-2.5 rounded-full transition-all duration-300 ${
+                  i === current
+                    ? "bg-[#ff4d2d] w-8"
+                    : "bg-muted-foreground/30 w-2.5 hover:bg-muted-foreground/50"
                 }`}
               />
             ))}

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useCallback, useRef, useEffect } from "react"
+import { useState } from "react"
 import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react"
 
 const projects = [
@@ -12,18 +12,18 @@ const projects = [
     link: "http://mpress.fwh.is/",
   },
   {
-    title: "Student-Score-Predictor-Regression",
-    description: "This project is a simple machine learning-based predictor that estimates student scores based on multiple factors.",
-    tags: ["Python", "Machine Learning", "Regression"],
-    image: "/images/project-student-score.jpg",
-    link: "https://github.com/BigRoos12/student-score-predictor-regression",
+    title: "Project Two",
+    description: "A brief description of the second project and what it does.",
+    tags: ["Web App", "PHP", "MySQL"],
+    image: "/placeholder-project-2.jpg",
+    link: "#",
   },
   {
-    title: "Engine-Emission-Linear-Model",
-    description: "This project uses real-world vehicle fuel consumption data to train a linear regression model. The model predicts the amount of CO2 emissions produced by a vehicle given its engine size.",
-    tags: ["Python", "Machine Learning", "Data Science"],
-    image: "/images/project-emission.jpg",
-    link: "https://github.com/BigRoos12/Engine-Emission-Linear-Model",
+    title: "Project Three",
+    description: "A brief description of the third project and what it does.",
+    tags: ["E-Commerce", "WordPress", "CSS"],
+    image: "/placeholder-project-3.jpg",
+    link: "#",
   },
   {
     title: "Project Four",
@@ -36,57 +36,16 @@ const projects = [
 
 export function PortfolioSection() {
   const [current, setCurrent] = useState(0)
-  const [isAnimating, setIsAnimating] = useState(false)
-  const [direction, setDirection] = useState<"left" | "right">("right")
-  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
-  const navigate = useCallback(
-    (dir: "left" | "right") => {
-      if (isAnimating) return
-      setDirection(dir)
-      setIsAnimating(true)
-
-      timeoutRef.current = setTimeout(() => {
-        setCurrent((c) => {
-          if (dir === "right") return c === projects.length - 1 ? 0 : c + 1
-          return c === 0 ? projects.length - 1 : c - 1
-        })
-        setIsAnimating(false)
-      }, 400)
-    },
-    [isAnimating],
-  )
-
-  const goTo = useCallback(
-    (index: number) => {
-      if (isAnimating || index === current) return
-      setDirection(index > current ? "right" : "left")
-      setIsAnimating(true)
-      timeoutRef.current = setTimeout(() => {
-        setCurrent(index)
-        setIsAnimating(false)
-      }, 400)
-    },
-    [isAnimating, current],
-  )
-
-  useEffect(() => {
-    return () => {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current)
-    }
-  }, [])
+  const prev = () => setCurrent((c) => (c === 0 ? projects.length - 1 : c - 1))
+  const next = () => setCurrent((c) => (c === projects.length - 1 ? 0 : c + 1))
 
   const project = projects[current]
-
-  const animClass = isAnimating
-    ? direction === "right"
-      ? "opacity-0 translate-x-8"
-      : "opacity-0 -translate-x-8"
-    : "opacity-100 translate-x-0"
 
   return (
     <section id="portfolio" className="py-20 px-6">
       <div className="max-w-5xl mx-auto">
+        {/* Header */}
         <div className="text-center mb-14">
           <h2 className="font-display text-4xl md:text-5xl tracking-wide text-foreground">
             My Works
@@ -96,72 +55,78 @@ export function PortfolioSection() {
           </p>
         </div>
 
+        {/* Slider */}
         <div className="relative">
+          {/* Project Card */}
           <div className="bg-card rounded-2xl overflow-hidden border border-border">
-            {/* Image area with smooth transition */}
-            <div className="relative w-full aspect-[16/9] bg-secondary/50 overflow-hidden">
-              <div
-                className={`absolute inset-0 transition-all ease-out ${animClass}`}
-                style={{ transitionDuration: "400ms" }}
-              >
+            {/* Image Area */}
+            <div className="relative w-full aspect-video bg-secondary/50 overflow-hidden group">
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="relative w-[85%] h-[85%] rounded-lg overflow-hidden shadow-2xl">
+                  <img
+                    src={project.image || "/placeholder.svg"}
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    crossOrigin="anonymous"
+                  />
+                </div>
+              </div>
+              {/* Floating second mockup */}
+              <div className="absolute -right-4 top-8 w-[45%] h-[80%] rounded-lg overflow-hidden shadow-2xl opacity-60 rotate-2 hidden md:block">
                 <img
-                  src={project.image || "/placeholder.svg"}
-                  alt={project.title}
-                  className="w-full h-full object-cover object-top"
+                  src={projects[(current + 1) % projects.length].image || "/placeholder.svg"}
+                  alt="Next project preview"
+                  className="w-full h-full object-cover"
                   crossOrigin="anonymous"
-                  loading="eager"
                 />
               </div>
             </div>
 
-            {/* Info area with smooth transition */}
+            {/* Info Area */}
             <div className="p-6 md:p-8 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-              <div
-                className={`flex-1 transition-all ease-out ${animClass}`}
-                style={{ transitionDuration: "400ms", transitionDelay: "50ms" }}
-              >
+              <div className="flex-1">
                 <h3 className="text-2xl md:text-3xl font-semibold text-foreground mb-3">
                   {project.title}
                 </h3>
                 <p className="text-muted-foreground mb-4 leading-relaxed">
                   {project.description}
                 </p>
+                {/* Tags */}
                 <div className="flex flex-wrap gap-2 mb-5">
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="px-4 py-1.5 rounded-full border border-border text-sm text-foreground bg-secondary/50"
+                      className="px-4 py-1.5 rounded-full border border-border text-sm text-foreground bg-secondary/50 hover:bg-secondary transition-colors"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
+                {/* View Project Button */}
                 <a
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-[#ff4d2d] text-foreground font-semibold text-sm hover:bg-[#e0432a] transition-colors duration-200"
+                  className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-[#ff4d2d] text-foreground font-semibold text-sm hover:bg-[#e0432a] transition-colors"
                 >
                   View Project
                   <ExternalLink className="w-4 h-4" />
                 </a>
               </div>
 
-              {/* Navigation arrows */}
+              {/* Navigation Arrows */}
               <div className="flex items-center gap-3">
                 <button
-                  onClick={() => navigate("left")}
-                  disabled={isAnimating}
+                  onClick={prev}
                   aria-label="Previous project"
-                  className="w-12 h-12 rounded-full bg-[#ff4d2d] text-foreground flex items-center justify-center hover:bg-[#e0432a] transition-colors duration-200 disabled:opacity-50"
+                  className="w-12 h-12 rounded-full bg-[#ff4d2d] text-foreground flex items-center justify-center hover:bg-[#e0432a] transition-colors"
                 >
                   <ChevronLeft className="w-5 h-5" />
                 </button>
                 <button
-                  onClick={() => navigate("right")}
-                  disabled={isAnimating}
+                  onClick={next}
                   aria-label="Next project"
-                  className="w-12 h-12 rounded-full bg-[#ff4d2d] text-foreground flex items-center justify-center hover:bg-[#e0432a] transition-colors duration-200 disabled:opacity-50"
+                  className="w-12 h-12 rounded-full bg-[#ff4d2d] text-foreground flex items-center justify-center hover:bg-[#e0432a] transition-colors"
                 >
                   <ChevronRight className="w-5 h-5" />
                 </button>
@@ -169,17 +134,15 @@ export function PortfolioSection() {
             </div>
           </div>
 
-          {/* Dots navigation */}
-          <div className="flex justify-center gap-2.5 mt-6">
+          {/* Dots */}
+          <div className="flex justify-center gap-2 mt-6">
             {projects.map((_, i) => (
               <button
                 key={i}
-                onClick={() => goTo(i)}
+                onClick={() => setCurrent(i)}
                 aria-label={`Go to project ${i + 1}`}
-                className={`h-2.5 rounded-full transition-all duration-300 ${
-                  i === current
-                    ? "bg-[#ff4d2d] w-8"
-                    : "bg-muted-foreground/30 w-2.5 hover:bg-muted-foreground/50"
+                className={`w-2.5 h-2.5 rounded-full transition-colors ${
+                  i === current ? "bg-[#ff4d2d]" : "bg-muted-foreground/30"
                 }`}
               />
             ))}

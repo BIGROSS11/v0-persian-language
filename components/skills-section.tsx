@@ -48,9 +48,7 @@ export function SkillsSection() {
           </h2>
         </div>
         <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-          I am from Pakistan and currently living in Karachi. I am doing
-          Bachelor{"'"}s in Software engineering and I will graduate in the year 2021.
-          I am UI UX designer and currently working as a freelancer.
+          {"I'm Ali from Karaj, Iran, a programmer with a strong passion for programming, web development, and WordPress. I enjoy creating practical and engaging projects, exploring UI/UX design, and learning new technologies. Currently, I'm freelancing and developing my skills, aiming to build meaningful projects and collaborate with like-minded people. I'm motivated by challenges and constantly looking to grow both technically and creatively."}
         </p>
       </div>
 

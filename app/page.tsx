@@ -1,6 +1,7 @@
 import { ParticlesCanvas } from "@/components/particles-canvas"
 import { HeroSection } from "@/components/hero-section"
 import { SkillsSection } from "@/components/skills-section"
+import { PortfolioSection } from "@/components/portfolio-section"
 import { InterestsSection } from "@/components/interests-section"
 import { ContactSection } from "@/components/contact-section"
 
@@ -11,6 +12,7 @@ export default function Page() {
       <main>
         <HeroSection />
         <SkillsSection />
+        <PortfolioSection />
         <InterestsSection />
         <ContactSection />
       </main>

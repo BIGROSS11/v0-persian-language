@@ -12,11 +12,11 @@ const projects = [
     link: "http://mpress.fwh.is/",
   },
   {
-    title: "Project Two",
-    description: "A brief description of the second project and what it does.",
-    tags: ["Web App", "PHP", "MySQL"],
-    image: "/placeholder-project-2.jpg",
-    link: "#",
+    title: "Student-Score-Predictor-Regression",
+    description: "This project is a simple machine learning-based predictor that estimates student scores based on multiple factors.",
+    tags: ["Python", "Machine Learning", "Regression"],
+    image: "/images/project-student-score.jpg",
+    link: "https://github.com/BigRoos12/student-score-predictor-regression",
   },
   {
     title: "Engine-Emission-Linear-Model",

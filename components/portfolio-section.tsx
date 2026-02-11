@@ -19,11 +19,11 @@ const projects = [
     link: "#",
   },
   {
-    title: "Project Three",
-    description: "A brief description of the third project and what it does.",
-    tags: ["E-Commerce", "WordPress", "CSS"],
-    image: "/placeholder-project-3.jpg",
-    link: "#",
+    title: "Engine-Emission-Linear-Model",
+    description: "This project uses real-world vehicle fuel consumption data to train a linear regression model. The model predicts the amount of CO2 emissions produced by a vehicle given its engine size.",
+    tags: ["Python", "Machine Learning", "Data Science"],
+    image: "/images/project-emission.jpg",
+    link: "https://github.com/BigRoos12/Engine-Emission-Linear-Model",
   },
   {
     title: "Project Four",

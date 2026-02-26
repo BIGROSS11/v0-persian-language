@@ -12,7 +12,7 @@ const projects = [
     link: "http://mpress.fwh.is/",
   },
   {
-    title: "Project Two",
+    title: "test",
     description: "A brief description of the second project and what it does.",
     tags: ["Web App", "PHP", "MySQL"],
     image: "/placeholder-project-2.jpg",
@@ -141,9 +141,8 @@ export function PortfolioSection() {
                 key={i}
                 onClick={() => setCurrent(i)}
                 aria-label={`Go to project ${i + 1}`}
-                className={`w-2.5 h-2.5 rounded-full transition-colors ${
-                  i === current ? "bg-[#ff4d2d]" : "bg-muted-foreground/30"
-                }`}
+                className={`w-2.5 h-2.5 rounded-full transition-colors ${i === current ? "bg-[#ff4d2d]" : "bg-muted-foreground/30"
+                  }`}
               />
             ))}
           </div>

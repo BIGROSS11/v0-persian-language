@@ -25,7 +25,7 @@ const projects = [
     title: "Mobile App UI",
     description: "Beautiful and intuitive mobile application interface with comprehensive design system and interactions.",
     tags: ["Mobile UI", "Figma", "Design"],
-    image: "/images/project-ecommerce.png",
+    image: "/images/Yo.png",
     link: "#",
   },
   {
@@ -33,7 +33,7 @@ const projects = [
     title: "Visual Effects Showcase",
     description: "Professional motion graphics and visual effects project combining cinematography with digital artistry.",
     tags: ["After Effects", "Adobe Premiere", "Video"],
-    image: "/images/project-ecommerce.png",
+    image: "/images/fucman.png",
     link: "#",
   },
 ]

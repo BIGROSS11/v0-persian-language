@@ -33,7 +33,7 @@ const projects = [
     title: "Visual Effects Showcase",
     description: "Professional motion graphics and visual effects project combining cinematography with digital artistry.",
     tags: ["After Effects", "Adobe Premiere", "Video"],
-    image: "/images/fucman.png",
+    image: "/images/fuckman.png",
     link: "#",
   },
 ]

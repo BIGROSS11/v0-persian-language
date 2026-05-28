@@ -17,7 +17,7 @@ const projects = [
     title: "Creative Portfolio",
     description: "Stunning portfolio website showcasing creative projects with smooth animations and modern design patterns.",
     tags: ["Web Design", "React", "Tailwind CSS"],
-    image: "/images/project-ecommerce.png",
+    image: "/images/45.png",
     link: "#",
   },
   {

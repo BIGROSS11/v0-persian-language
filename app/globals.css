@@ -2,13 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Primer Design System Animations */
+/* Adobe Premiere Design System Animations */
 @keyframes skillPulse {
   0%, 100% {
-    box-shadow: 0 0 0 0 rgba(9, 105, 218, 0.15);
+    box-shadow: 0 0 0 0 rgba(255, 73, 0, 0.2);
   }
   50% {
-    box-shadow: 0 0 0 10px rgba(9, 105, 218, 0);
+    box-shadow: 0 0 0 12px rgba(255, 73, 0, 0);
   }
 }
 
@@ -25,65 +25,46 @@
 
 @keyframes glowPulse {
   0%, 100% {
-    filter: drop-shadow(0 0 0px rgba(9, 105, 218, 0.4));
+    filter: drop-shadow(0 0 0px rgba(255, 73, 0, 0.4));
   }
   50% {
-    filter: drop-shadow(0 0 10px rgba(9, 105, 218, 0.8));
+    filter: drop-shadow(0 0 12px rgba(255, 73, 0, 0.8));
   }
 }
 
 @keyframes borderGlow {
   0%, 100% {
-    border-color: rgba(9, 105, 218, 0.5);
-    box-shadow: 0 0 0 0 rgba(9, 105, 218, 0.1);
+    border-color: rgba(255, 73, 0, 0.4);
+    box-shadow: 0 0 0 0 rgba(255, 73, 0, 0.1);
   }
   50% {
-    border-color: rgba(9, 105, 218, 1);
-    box-shadow: 0 0 12px rgba(9, 105, 218, 0.3);
+    border-color: rgba(255, 73, 0, 0.9);
+    box-shadow: 0 0 16px rgba(255, 73, 0, 0.4);
   }
 }
 
 @layer base {
   :root {
-    /* Primer Light Mode */
-    --background: 0 0% 100%;
-    --foreground: 0 0% 13%;
-    --canvas: 210 100% 98%;
-    --canvas-subtle: 210 40% 96%;
-    --canvas-inset: 210 100% 94%;
-    --canvas-overlay: 210 100% 98%;
-    --canvas-backdrop: 210 100% 98%;
-    
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 13%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 13%;
-    
-    /* Primer Brand Blue */
-    --primary: 211 100% 44%;
-    --primary-foreground: 0 0% 100%;
-    --accent: 211 100% 44%;
-    --accent-emphasis: 211 100% 44%;
-    --accent-foreground: 0 0% 100%;
-    
-    /* Primer Grays */
-    --secondary: 210 40% 13%;
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 7%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 48 100% 50%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 12%;
     --secondary-foreground: 0 0% 100%;
-    --subtle: 210 40% 96.5%;
-    --muted: 210 14% 55%;
-    --muted-foreground: 210 14% 55%;
-    --border: 210 40% 90%;
-    --input: 210 40% 96.5%;
-    
-    /* Semantic */
-    --destructive: 356 100% 62%;
-    --destructive-foreground: 0 0% 100%;
-    --emphasis: 0 0% 13%;
-    --success: 137 72% 31%;
-    --warning: 38 92% 50%;
-    
-    --ring: 211 100% 44%;
-    --radius: 0.375rem;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 60%;
+    --accent: 48 100% 50%;
+    --accent-foreground: 0 0% 0%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 48 100% 50%;
+    --radius: 0.75rem;
   }
 }
 

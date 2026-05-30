@@ -72,10 +72,9 @@ export function SkillsSection() {
               key={skill.name}
               className={`
                 group flex flex-col items-center justify-center
-                bg-card border border-[rgba(255,73,0,0.3)] rounded-xl p-5
-                transition-all duration-500 ease-out
-                hover:-translate-y-2 hover:border-[rgba(255,73,0,0.8)] hover:shadow-[0_8px_32px_rgba(255,73,0,0.25)]
-                hover:bg-[rgba(255,73,0,0.05)]
+                bg-card border border-border rounded-xl p-5
+                transition-all duration-300 ease-out
+                hover:-translate-y-2 hover:border-[#ff4d2d] hover:shadow-[0_8px_32px_rgba(255,77,45,0.3)]
                 relative overflow-hidden
                 cursor-pointer
                 ${isVisible
@@ -86,12 +85,8 @@ export function SkillsSection() {
               style={{
                 transitionDelay: isVisible ? `${index * 80}ms` : "0ms",
                 aspectRatio: "1",
-                animation: isVisible ? `skillPulse 2.5s ease-in-out infinite` : "none",
-                animationDelay: `${index * 100}ms`,
               }}
             >
-              {/* Adobe Premiere glow effect background */}
-              <div className="absolute inset-0 bg-gradient-to-br from-[rgba(255,73,0,0.15)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" />
             
               {/* biome-ignore lint/a11y/imgRedundantAlt: skill icon */}
               <img
@@ -99,12 +94,12 @@ export function SkillsSection() {
                 alt={`${skill.name} icon`}
                 width={56}
                 height={56}
-                className={`mb-3 transition-transform duration-300 group-hover:scale-110 relative z-10 ${
+                className={`mb-3 transition-transform duration-300 group-hover:scale-110 ${
                   skill.name === "GITHUB" ? "invert" : ""
                 }`}
                 crossOrigin="anonymous"
               />
-              <p className="text-sm font-semibold text-card-foreground tracking-wide relative z-10">
+              <p className="text-sm font-semibold text-card-foreground tracking-wide">
                 {skill.name}
               </p>
             </div>

@@ -44,109 +44,103 @@ export function PortfolioSection() {
 
   return (
     <section id="portfolio" className="py-20 px-6">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-14">
-          <h2 className="font-display text-4xl md:text-5xl tracking-wide text-foreground">
-            My Works
-          </h2>
-          <p className="text-muted-foreground mt-3 text-lg">
+        <div className="mb-16">
+          <div className="flex items-center gap-3 mb-4">
+            <span className="block w-1 h-10 bg-foreground rounded-full" />
+            <h2 className="font-display text-4xl md:text-5xl tracking-wide text-foreground">
+              My Works
+            </h2>
+          </div>
+          <p className="text-muted-foreground text-lg max-w-2xl">
             Discover My Most Recent Project Highlights
           </p>
         </div>
 
-        {/* Slider */}
-        <div className="relative">
-          {/* Project Card */}
-          <div className="bg-card rounded-2xl overflow-hidden border border-border">
-            {/* Image Area */}
-            <div className="relative w-full aspect-video bg-secondary/50 overflow-hidden group">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="relative w-[85%] h-[85%] rounded-lg overflow-hidden shadow-2xl">
-                  <img
-                    src={project.image || "/placeholder.svg"}
-                    alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    crossOrigin="anonymous"
-                  />
-                </div>
-              </div>
-              {/* Floating second mockup */}
-              <div className="absolute -right-4 top-8 w-[45%] h-[80%] rounded-lg overflow-hidden shadow-2xl opacity-60 rotate-2 hidden md:block">
+        {/* Projects Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {projects.map((proj, idx) => (
+            <div
+              key={idx}
+              className={`group bg-card rounded-2xl overflow-hidden border border-border transition-all duration-300 hover:border-[#ff4d2d] hover:shadow-[0_12px_40px_rgba(255,77,45,0.2)] ${
+                idx === current ? "ring-2 ring-[#ff4d2d]" : ""
+              }`}
+            >
+              {/* Image */}
+              <div className="relative w-full aspect-video bg-secondary/50 overflow-hidden">
                 <img
-                  src={projects[(current + 1) % projects.length].image || "/placeholder.svg"}
-                  alt="Next project preview"
-                  className="w-full h-full object-cover"
+                  src={proj.image || "/placeholder.svg"}
+                  alt={proj.title}
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                   crossOrigin="anonymous"
                 />
               </div>
-            </div>
 
-            {/* Info Area */}
-            <div className="p-6 md:p-8 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-              <div className="flex-1">
-                <h3 className="text-2xl md:text-3xl font-semibold text-foreground mb-3">
-                  {project.title}
+              {/* Content */}
+              <div className="p-6">
+                <h3 className="text-xl font-semibold text-foreground mb-2">
+                  {proj.title}
                 </h3>
-                <p className="text-muted-foreground mb-4 leading-relaxed">
-                  {project.description}
+                <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
+                  {proj.description}
                 </p>
+
                 {/* Tags */}
                 <div className="flex flex-wrap gap-2 mb-5">
-                  {project.tags.map((tag) => (
+                  {proj.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="px-4 py-1.5 rounded-full border border-border text-sm text-foreground bg-secondary/50 hover:bg-secondary transition-colors"
+                      className="px-3 py-1 text-xs rounded-full border border-border bg-secondary/30 text-foreground hover:bg-[#ff4d2d]/10 hover:border-[#ff4d2d] transition-colors"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
-                {/* View Project Button */}
+
+                {/* Button */}
                 <a
-                  href={project.link}
+                  href={proj.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-[#ff4d2d] text-foreground font-semibold text-sm hover:bg-[#e0432a] transition-colors"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#ff4d2d] text-foreground font-semibold text-sm hover:bg-[#e0432a] transition-colors"
                 >
                   View Project
                   <ExternalLink className="w-4 h-4" />
                 </a>
               </div>
-
-              {/* Navigation Arrows */}
-              <div className="flex items-center gap-3">
-                <button
-                  onClick={prev}
-                  aria-label="Previous project"
-                  className="w-12 h-12 rounded-full bg-[#ff4d2d] text-foreground flex items-center justify-center hover:bg-[#e0432a] transition-colors"
-                >
-                  <ChevronLeft className="w-5 h-5" />
-                </button>
-                <button
-                  onClick={next}
-                  aria-label="Next project"
-                  className="w-12 h-12 rounded-full bg-[#ff4d2d] text-foreground flex items-center justify-center hover:bg-[#e0432a] transition-colors"
-                >
-                  <ChevronRight className="w-5 h-5" />
-                </button>
-              </div>
             </div>
-          </div>
+          ))}
+        </div>
 
-          {/* Dots */}
-          <div className="flex justify-center gap-2 mt-6">
+        {/* Navigation */}
+        <div className="flex items-center justify-center gap-4 mt-12">
+          <button
+            onClick={prev}
+            aria-label="Previous project"
+            className="w-12 h-12 rounded-full bg-[#ff4d2d] text-foreground flex items-center justify-center hover:bg-[#e0432a] transition-colors"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <div className="flex gap-2">
             {projects.map((_, i) => (
               <button
                 key={i}
                 onClick={() => setCurrent(i)}
                 aria-label={`Go to project ${i + 1}`}
-                className={`w-2.5 h-2.5 rounded-full transition-colors ${
-                  i === current ? "bg-[#ff4d2d]" : "bg-muted-foreground/30"
+                className={`h-2 rounded-full transition-all ${
+                  i === current ? "bg-[#ff4d2d] w-8" : "bg-muted-foreground/30 w-2"
                 }`}
               />
             ))}
           </div>
+          <button
+            onClick={next}
+            aria-label="Next project"
+            className="w-12 h-12 rounded-full bg-[#ff4d2d] text-foreground flex items-center justify-center hover:bg-[#e0432a] transition-colors"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
         </div>
       </div>
     </section>

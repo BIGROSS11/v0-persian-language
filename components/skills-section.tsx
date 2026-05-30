@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 
 const skills = [
-  { name: "HTML", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
+  { name: "FIGMA", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" },
   { name: "CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" },
   { name: "JAVASCRIPT", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
   { name: "GITHUB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" },
@@ -75,6 +75,7 @@ export function SkillsSection() {
                 bg-card rounded-xl p-5
                 transition-all duration-500 ease-out
                 hover:-translate-y-2 hover:shadow-[0_0_24px_rgba(255,255,255,0.15)]
+                relative overflow-hidden
                 ${isVisible
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-8"
@@ -83,20 +84,25 @@ export function SkillsSection() {
               style={{
                 transitionDelay: isVisible ? `${index * 80}ms` : "0ms",
                 aspectRatio: "1",
+                animation: isVisible ? `skillPulse 2s ease-in-out infinite` : "none",
+                animationDelay: `${index * 100}ms`,
               }}
             >
+              {/* Glow effect background */}
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" />
+            
               {/* biome-ignore lint/a11y/imgRedundantAlt: skill icon */}
               <img
                 src={skill.icon || "/placeholder.svg"}
                 alt={`${skill.name} icon`}
                 width={56}
                 height={56}
-                className={`mb-3 transition-transform duration-300 group-hover:scale-110 ${
+                className={`mb-3 transition-transform duration-300 group-hover:scale-110 relative z-10 ${
                   skill.name === "GITHUB" ? "invert" : ""
                 }`}
                 crossOrigin="anonymous"
               />
-              <p className="text-sm font-semibold text-card-foreground tracking-wide">
+              <p className="text-sm font-semibold text-card-foreground tracking-wide relative z-10">
                 {skill.name}
               </p>
             </div>

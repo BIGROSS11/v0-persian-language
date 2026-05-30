@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react"
 
 const skills = [
   { name: "FIGMA", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" },
-  { name: "CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" },
+  { name: "ADOBE PREMIERE", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" },
   { name: "JAVASCRIPT", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
   { name: "GITHUB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" },
   { name: "MYSQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
@@ -37,17 +37,17 @@ export function SkillsSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-20 px-6 md:px-16 lg:px-24"
+      className="relative py-24 px-6 md:px-16 lg:px-24 bg-canvas"
     >
       {/* Section Header */}
       <div className="text-center mb-16">
         <div className="flex items-center justify-center gap-3 mb-4">
-          <span className="block w-1 h-10 bg-foreground rounded-full" />
-          <h2 className="font-display text-4xl md:text-5xl tracking-wide text-foreground">
+          <span className="block w-1 h-10 bg-accent-emphasis rounded-full" />
+          <h2 className="font-display text-4xl md:text-5xl tracking-wide text-emphasis">
             What I do
           </h2>
         </div>
-        <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+        <p className="text-muted max-w-2xl mx-auto leading-relaxed">
           {"I'm Ali from Karaj, Iran, a programmer with a strong passion for programming, web development, and WordPress. I enjoy creating practical and engaging projects, exploring UI/UX design, and learning new technologies. Currently, I'm freelancing and developing my skills, aiming to build meaningful projects and collaborate with like-minded people. I'm motivated by challenges and constantly looking to grow both technically and creatively."}
         </p>
       </div>
@@ -56,9 +56,9 @@ export function SkillsSection() {
       <div className="flex items-start gap-6 max-w-5xl mx-auto">
         {/* Vertical "Skills" label */}
         <div className="hidden md:flex flex-col items-center gap-3 pt-8">
-          <span className="block w-1 h-16 bg-foreground rounded-full" />
+          <span className="block w-1 h-16 bg-accent-emphasis rounded-full" />
           <span
-            className="font-display text-2xl tracking-widest text-foreground"
+            className="font-display text-2xl tracking-widest text-emphasis font-semibold"
             style={{ writingMode: "vertical-lr" }}
           >
             Skills
@@ -72,10 +72,12 @@ export function SkillsSection() {
               key={skill.name}
               className={`
                 group flex flex-col items-center justify-center
-                bg-card rounded-xl p-5
+                bg-subtle border border-muted rounded-lg p-5
                 transition-all duration-500 ease-out
-                hover:-translate-y-2 hover:shadow-[0_0_24px_rgba(255,255,255,0.15)]
+                hover:-translate-y-2 hover:border-accent hover:shadow-[0_8px_24px_rgba(9,105,218,0.2)]
+                hover:bg-canvas
                 relative overflow-hidden
+                cursor-pointer
                 ${isVisible
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-8"
@@ -84,12 +86,12 @@ export function SkillsSection() {
               style={{
                 transitionDelay: isVisible ? `${index * 80}ms` : "0ms",
                 aspectRatio: "1",
-                animation: isVisible ? `skillPulse 2s ease-in-out infinite` : "none",
+                animation: isVisible ? `skillPulse 2.5s ease-in-out infinite` : "none",
                 animationDelay: `${index * 100}ms`,
               }}
             >
-              {/* Glow effect background */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" />
+              {/* Primer glow effect background */}
+              <div className="absolute inset-0 bg-gradient-to-br from-accent/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg" />
             
               {/* biome-ignore lint/a11y/imgRedundantAlt: skill icon */}
               <img
@@ -102,7 +104,7 @@ export function SkillsSection() {
                 }`}
                 crossOrigin="anonymous"
               />
-              <p className="text-sm font-semibold text-card-foreground tracking-wide relative z-10">
+              <p className="text-sm font-semibold text-emphasis tracking-wide relative z-10">
                 {skill.name}
               </p>
             </div>
